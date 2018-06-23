@@ -34,6 +34,7 @@ class Login extends React.Component {
         this.setState({
             islogged: false
         })
+        localStorage.setItem("username", "");
         this.onHide()
     }
 
