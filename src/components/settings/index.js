@@ -4,13 +4,13 @@ import { Button } from 'primereact/components/button/Button'
 import { DataTable } from 'primereact/components/datatable/DataTable';
 import { Column } from 'primereact/components/column/Column';
 
-import json from './data.json'
+import json from './busdata.json'
 
 class Settings extends React.Component {
     constructor() {
         super();
         this.state = {
-            cars: []
+            alerts: []
         };
         this.rowExpansionTemplate = this.rowExpansionTemplate.bind(this);
     }
@@ -25,8 +25,17 @@ class Settings extends React.Component {
         //     data => this.setState({ cars: data })
         // });
         console.log(json)
+
+        const alerts = json.alerts.map(e => {
+            return {
+                busstopid: e.busstopid,
+                time: e.time,
+                stopname: e.stopname,
+                filter: e.filter.join(', ')
+            }
+        })
         this.setState({
-            cars: json.data
+            alerts: alerts
         })
     }
 
@@ -40,14 +49,17 @@ class Settings extends React.Component {
                 <div className="ui-g">
 
 
-                    <div className="ui-md-2">Year: </div>
-                    <div className="ui-md-10" style={{ fontWeight: 'bold' }}>{data.year}</div>
+                    <div className="ui-md-2">Stop Id </div>
+                    <div className="ui-md-10" style={{ fontWeight: 'bold' }}>{data.busstopid}</div>
 
-                    <div className="ui-md-2">Brand: </div>
-                    <div className="ui-md-10" style={{ fontWeight: 'bold' }}>{data.brand}</div>
+                    <div className="ui-md-2">Name: </div>
+                    <div className="ui-md-10" style={{ fontWeight: 'bold' }}>{data.stopname}</div>
 
-                    <div className="ui-md-2">Color: </div>
-                    <div className="ui-md-10" style={{ fontWeight: 'bold' }}>{data.color}</div>
+                    <div className="ui-md-2">time: </div>
+                    <div className="ui-md-10" style={{ fontWeight: 'bold' }}>{data.time}</div>
+
+                    <div className="ui-md-2">Bus lines: </div>
+                    <div className="ui-md-10" style={{ fontWeight: 'bold' }}>{data.filter}</div>
                 </div>
             </div>
         </div>;
@@ -72,12 +84,13 @@ class Settings extends React.Component {
                     </Toolbar>
 
                     <div className="content-section implementation">
-                        <DataTable value={this.state.cars} expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({ expandedRows: e.data })}
+                        <DataTable value={this.state.alerts} expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({ expandedRows: e.data })}
                             rowExpansionTemplate={this.rowExpansionTemplate}>
                             <Column expander={true} style={{ width: '2em' }} />
-                            <Column field="ID" header="Id" />
-                            <Column field="Stop" header="stop number" />
-                            <Column field="Buses" header="bus lines" />
+                            <Column field="busstopid" header="stop id" />
+                            <Column field="stopname" header="name" />
+                            <Column field="time" header="time" />
+                            <Column field="filter" header="bus lines" />
                         </DataTable>
                     </div>
 
