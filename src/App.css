@@ -30,3 +30,24 @@
         transform: rotate(360deg);
     }
 }
+
+.bus-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 24em;
+    justify-content: center;
+}
+
+.bus-results:first-child {
+    padding: 15vh;
+}
+
+.bus-results div {
+    font-size: 5em;
+    border: 1px solid grey;
+    padding: 7vh;
+    width: 100vw;
+    text-align: center;
+    /* height: 20vh; */
+}

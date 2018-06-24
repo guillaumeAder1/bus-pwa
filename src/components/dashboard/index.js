@@ -21,40 +21,56 @@ class Dashborad extends Component {
                 alerts: JSON.parse(list).map(e => {
                     return {
                         label: `${e.busstopid} - ${e.time}`,
-                        command: () => this.selected(e.busstopid),
+                        command: () => this.selected(e),
                         items: e
                     }
                 })
             })
         }
     }
-    displayTime(data) {
 
+
+    handleJson(json, selected) {
+        if (json.errorcode === "1") {
+            this.growl.current.show({
+                severity: 'warn',
+                summary: json.errormessage,
+                detail: `no results for stopid: ${selected.busstopid}`
+            });
+        } else {
+            this.growl.current.show({ severity: 'success', summary: "results found" });
+            this.setState({
+                selected: json.results.filter(e => selected.filter.indexOf(e.route) > -1)
+            })
+        }
+    }
+
+    handleErr(error) {
+        this.growl.current.show({ severity: 'error', summary: "Fetch Data Issue", detail: error.toString() });
+        console.warn('Error:', error)
     }
     selected(e) {
-        const busapi = `https://data.smartdublin.ie/cgi-bin/rtpi/realtimebusinformation?stopid=${e}&format=json`
+        const busapi = `https://data.smartdublin.ie/cgi-bin/rtpi/realtimebusinformation?stopid=${e.busstopid}&format=json`
         fetch(busapi)
             .then(response => response.json())
-            .then(json => {
-                if (json.errorcode === "1") {
-                    this.growl.current.show({ severity: 'warn', summary: json.errormessage, detail: `no results for stopid: ${e}` });
-                } else {
-                    this.growl.current.show({ severity: 'success', summary: "results found" });
-                    this.displayTime(json.results)
-                }
-            })
-            .catch(error => {
-                this.growl.current.show({ severity: 'error', summary: "Fetch Data Issue", detail: error.toString() });
-                console.warn('Error:', error)
-            });
+            .then(json => this.handleJson(json, e))
+            .catch(error => this.handleErr(error));
     }
     render() {
         return (
             <Fragment>
                 <Growl ref={this.growl}></Growl>
-
                 <h1 title="Dashborad"> Dashborad </h1>
                 {this.state.alerts && <SplitButton label="select alert" icon="pi pi-check" model={this.state.alerts}></SplitButton>}
+                <div className="bus-results" >
+                    {this.state.selected &&
+                        this.state.selected.map((e, i) => {
+                            return (
+                                <div key={i}>{`${e.duetime} min - ${e.route}`}</div>
+                            )
+                        })
+                    }
+                </div>
             </Fragment>
         )
     }
