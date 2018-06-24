@@ -39,14 +39,15 @@
     justify-content: center;
 }
 
-.bus-results:first-child {
-    padding: 15vh;
+.bus-results div:first-child {
+    padding: 10vh;
+    font-size: 5em;
 }
 
 .bus-results div {
-    font-size: 5em;
+    font-size: 3em;
     border: 1px solid grey;
-    padding: 7vh;
+    padding: 2vh;
     width: 100vw;
     text-align: center;
     /* height: 20vh; */
