@@ -3,6 +3,7 @@ import { Toolbar } from 'primereact/components/toolbar/Toolbar';
 import { Button } from 'primereact/components/button/Button'
 import { DataTable } from 'primereact/components/datatable/DataTable';
 import { Column } from 'primereact/components/column/Column';
+import { Growl } from 'primereact/components/growl/Growl';
 
 import json from './busdata.json'
 
@@ -13,6 +14,7 @@ class Settings extends React.Component {
             alerts: []
         };
         this.rowExpansionTemplate = this.rowExpansionTemplate.bind(this);
+        this.growl = React.createRef();
     }
 
     componentDidMount() {
@@ -39,6 +41,11 @@ class Settings extends React.Component {
         })
     }
 
+    save() {
+        localStorage.setItem("alerts", JSON.stringify(this.state.alerts));
+        this.growl.current.show({ severity: 'success', summary: 'Alert saved', detail: 'everything saved' });
+    }
+
     rowExpansionTemplate(data) {
 
         return <div className="ui-g ui-fluid">
@@ -49,7 +56,7 @@ class Settings extends React.Component {
                 <div className="ui-g">
 
 
-                    <div className="ui-md-2">Stop Id </div>
+                    <div className="ui-md-2">StopID: </div>
                     <div className="ui-md-10" style={{ fontWeight: 'bold' }}>{data.busstopid}</div>
 
                     <div className="ui-md-2">Name: </div>
@@ -69,6 +76,8 @@ class Settings extends React.Component {
         return (
             <React.Fragment>
 
+                <Growl ref={this.growl}></Growl>
+
                 <div className="content-section">
                     <div className="feature-intro">
                         <h1>Settings</h1>
@@ -79,7 +88,7 @@ class Settings extends React.Component {
                     <Toolbar>
                         <div className="ui-toolbar-group-left">
                             <Button label="create new alert" icon="pi pi-plus" />
-                            <Button label="save all changes" icon="pi pi-check" className="ui-button-warning" />
+                            <Button onClick={e => this.save()} label="save all changes" icon="pi pi-check" className="ui-button-warning" />
                         </div>
                     </Toolbar>
 

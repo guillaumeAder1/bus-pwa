@@ -2,7 +2,7 @@
     "id": "5b2e93f4e748a96cd401762a",
     "username": "Summers",
     "alerts": [{
-            "busstopid": 1686,
+            "busstopid": 59,
             "stopname": "Burlington Road to Damastown",
             "latitude": 64.24867,
             "longitude": 124.393566,
@@ -14,7 +14,7 @@
             ]
         },
         {
-            "busstopid": 361,
+            "busstopid": 1696,
             "stopname": "Drimnagh Rd to Ashington",
 
             "latitude": -32.203159,
@@ -36,7 +36,7 @@
             ]
         },
         {
-            "busstopid": 495,
+            "busstopid": 49987987895,
             "stopname": "Blanchardstown to Wilton Terrace",
             "latitude": -26.460996,
             "longitude": -84.604633,

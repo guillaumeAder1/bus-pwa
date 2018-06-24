@@ -39,7 +39,8 @@ class Login extends React.Component {
     }
 
     componentDidMount() {
-        if (localStorage.getItem("username")) {
+        const user = localStorage.getItem("username")
+        if (user) {
             this.setState({
                 islogged: true
             })
