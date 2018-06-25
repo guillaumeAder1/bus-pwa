@@ -1,0 +1,41 @@
+[{
+        "stopid": 2,
+        "stopid_1": 2,
+        "fullname": "Parnell Square",
+        "latitude": 53.35224111,
+        "longitude": -6.263695,
+        "Operators": "38B,38D,38,38A,46A,46E"
+    },
+    {
+        "stopid": 3,
+        "stopid_1": 3,
+        "fullname": "Parnell Square",
+        "latitude": 53.35230694,
+        "longitude": -6.263783056,
+        "Operators": "122,120"
+    },
+    {
+        "stopid": 4,
+        "stopid_1": 4,
+        "fullname": "Parnell Square",
+        "latitude": 53.35256694,
+        "longitude": -6.264166111,
+        "Operators": "7,9,7D,7A,7B"
+    },
+    {
+        "stopid": 6,
+        "stopid_1": 6,
+        "fullname": "Parnell Square",
+        "latitude": 53.35274389,
+        "longitude": -6.264443056,
+        "Operators": "4"
+    },
+    {
+        "stopid": 7,
+        "stopid_1": 7,
+        "fullname": "Parnell Square",
+        "latitude": 53.35283611,
+        "longitude": -6.264561944,
+        "Operators": "40,140,40B,40D,13"
+    }
+]
