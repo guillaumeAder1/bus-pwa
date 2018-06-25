@@ -3,7 +3,7 @@
     "username": "Summers",
     "alerts": [{
             "busstopid": 59,
-            "stopname": "Burlington Road to Damastown",
+            "stopname": "Home to work",
             "latitude": 64.24867,
             "longitude": 124.393566,
             "time": "17:40",
@@ -15,13 +15,15 @@
         },
         {
             "busstopid": 1696,
-            "stopname": "Drimnagh Rd to Ashington",
-
+            "stopname": "Work to Home",
             "latitude": -32.203159,
             "longitude": -116.497428,
             "time": "17:30",
             "filter": [
-                "31"
+                "39",
+                "39A",
+                "38",
+                "38A"
             ]
         },
         {

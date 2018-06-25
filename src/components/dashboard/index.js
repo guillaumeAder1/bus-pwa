@@ -60,7 +60,7 @@ class Dashborad extends Component {
         return (
             <Fragment>
                 <Growl ref={this.growl}></Growl>
-                <h1 title="Dashborad"> Dashborad 2.0 </h1>
+                <h1 title="Dashborad"> Dashboard 2.0 </h1>
                 {this.state.alerts && <SplitButton label="select alert" icon="pi pi-check" model={this.state.alerts}></SplitButton>}
                 <div className="bus-results" >
                     {this.state.selected &&
