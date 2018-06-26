@@ -1,9 +1,8 @@
-// Link.react.test.js
 import React from 'react';
 import Dashboard from '../components/dashboard/index';
 import renderer from 'react-test-renderer';
 
-test('Link changes the class when hovered', () => {
+test('dashboard component', () => {
     const component = renderer.create(
         <Dashboard />,
     );

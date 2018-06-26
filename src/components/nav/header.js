@@ -15,6 +15,7 @@ class Header extends React.Component {
         return (
 
             <Menu
+                theme='dark'
                 onClick={this.handleClick}
                 selectedKeys={[this.state.current]}
                 mode="horizontal"
