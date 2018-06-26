@@ -2,8 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { SplitButton } from 'primereact/components/splitbutton/SplitButton';
 import { Growl } from 'primereact/components/growl/Growl';
 
-
-
+import Button from 'antd/lib/button';
 
 class Dashborad extends Component {
     constructor() {
@@ -71,6 +70,7 @@ class Dashborad extends Component {
                         })
                     }
                 </div>
+                <Button type="primary">Button</Button>
             </Fragment>
         )
     }

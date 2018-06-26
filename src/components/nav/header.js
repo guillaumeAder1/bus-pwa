@@ -23,6 +23,7 @@ class Header extends React.Component {
                     <ul className="topbar-menu">
                         <li><Link to="/dashboard"> Dashboard </Link></li>
                         <li><Link to="/settings"> Settings </Link></li>
+                        <li><Link to="/ant"> Ant </Link></li>
                         <Login />
 
                     </ul>
