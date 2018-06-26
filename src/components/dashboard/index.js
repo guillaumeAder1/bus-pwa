@@ -1,18 +1,13 @@
 import React, { Component, Fragment } from 'react'
-import { SplitButton } from 'primereact/components/splitbutton/SplitButton';
-import { Growl } from 'primereact/components/growl/Growl';
-
 import Button from 'antd/lib/button';
+import { Select, notification } from 'antd';
 
-import { Select } from 'antd';
 const Option = Select.Option;
 
 class Dashborad extends Component {
     constructor() {
         super();
         this.state = { alerts: false, selected: false };
-        this.growl = React.createRef();
-
     }
 
 
@@ -23,8 +18,7 @@ class Dashborad extends Component {
                 alerts: JSON.parse(list).map(e => {
                     return {
                         label: `${e.busstopid} - ${e.time}`,
-                        command: () => this.selected(e),
-                        items: e
+                        data: e
                     }
                 })
             })
@@ -32,49 +26,52 @@ class Dashborad extends Component {
     }
 
 
-    handleJson(json, selected) {
+    handleJson(json) {
         if (json.errorcode === "1") {
-            this.growl.current.show({
-                severity: 'warn',
-                summary: json.errormessage,
-                detail: `no results for stopid: ${selected.busstopid}`
-            });
+            this.notification('warning', `no results for stopid: ${json.stopid}`, 'warn');
         } else {
-            this.growl.current.show({ severity: 'success', summary: "results found" });
+            this.notification('sucess', 'results found', 'open');
+
+            const search = this.state.alerts.filter(e => e.data.busstopid == json.stopid)[0]
+            const matching = json.results.filter(e => search.data.filter.indexOf(e.route) > -1)
             this.setState({
-                selected: json.results.filter(e => selected.filter.indexOf(e.route) > -1)
+                selected: matching
             })
         }
     }
 
+    notification(msg, text, level) {
+        notification[level]({
+            message: msg,
+            description: text
+        })
+    }
+
     handleErr(error) {
-        this.growl.current.show({ severity: 'error', summary: "Fetch Data Issue", detail: error.toString() });
+        this.notification('error', `issuewhile fetching data`, 'error');
         console.warn('Error:', error)
     }
-    selected(e) {
-
-        console.log(e)
-        const busapi = `https://data.smartdublin.ie/cgi-bin/rtpi/realtimebusinformation?stopid=${e.busstopid}&format=json`
+    selected(id) {
+        const busapi = `https://data.smartdublin.ie/cgi-bin/rtpi/realtimebusinformation?stopid=${id}&format=json`
         fetch(busapi)
             .then(response => response.json())
-            .then(json => this.handleJson(json, e))
+            .then(json => this.handleJson(json))
             .catch(error => this.handleErr(error));
     }
     render() {
         return (
             <Fragment>
-                <Growl ref={this.growl}></Growl>
                 <h1 title="Dashborad"> Dashboard 2.0 </h1>
                 {this.state.alerts &&
                     <Select
                         onChange={(e) => this.selected(e)}
                         placeholder="select an alert"
                         style={{ width: '100%', padding: '10px' }}>
-                        {this.state.alerts.map((e, i) => <Option key={i} value={e.items}>{e.label}</Option>)}
+                        {this.state.alerts.map((e, i) => <Option key={i} value={e.data.busstopid}>{e.label}</Option>)}
                     </Select>
                 }
 
-                {this.state.alerts && <SplitButton label="select alert" icon="pi pi-check" model={this.state.alerts}></SplitButton>}
+                {/* {this.state.alerts && <SplitButton label="select alert" icon="pi pi-check" model={this.state.alerts}></SplitButton>} */}
                 <div className="bus-results" >
                     {this.state.selected &&
                         this.state.selected.map((e, i) => {
