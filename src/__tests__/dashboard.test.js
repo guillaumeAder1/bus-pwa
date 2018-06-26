@@ -7,7 +7,7 @@ test('dashboard component', () => {
         <Dashboard />,
     );
     let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(tree).toMatchSnapshot(); #
 
     // // manually trigger the callback
     // tree.props.onMouseEnter();
