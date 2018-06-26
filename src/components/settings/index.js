@@ -1,11 +1,13 @@
 import React from 'react'
 import { Toolbar } from 'primereact/components/toolbar/Toolbar';
-import { Button } from 'primereact/components/button/Button'
+// import { Button } from 'primereact/components/button/Button'
 import { DataTable } from 'primereact/components/datatable/DataTable';
 import { Column } from 'primereact/components/column/Column';
 import { Growl } from 'primereact/components/growl/Growl';
 
 import json from './busdata.json'
+import { Table, Modal, Button, notification } from 'antd';
+
 
 class Settings extends React.Component {
     constructor() {
@@ -14,36 +16,30 @@ class Settings extends React.Component {
             alerts: []
         };
         this.rowExpansionTemplate = this.rowExpansionTemplate.bind(this);
-        this.growl = React.createRef();
+        // this.growl = React.createRef();
     }
 
     componentDidMount() {
-        //this.carservice.getCarsSmall().then(data => this.setState({ cars: data }));
-        // const url = "https://www.primefaces.org/primereact/showcase/resources/demo/data/cars-small.json"
-        // fetch(url).then(function (response) {
-        //     return response.json();
-        // }).then(function (data) {
-        //     console.log(data);
-        //     data => this.setState({ cars: data })
-        // });
-        console.log(json)
 
-        const alerts = json.alerts.map(e => {
-            return {
-                busstopid: e.busstopid,
-                time: e.time,
-                stopname: e.stopname,
-                filter: e.filter.join(', ')
-            }
-        })
         this.setState({
-            alerts: alerts
+            alerts: json.alerts.map(e => {
+                return {
+                    busstopid: e.busstopid,
+                    time: e.time,
+                    stopname: e.stopname,
+                    filter: e.filter.join(', ')
+                }
+            })
         })
     }
 
     save() {
         localStorage.setItem("alerts", JSON.stringify(this.state.alerts));
-        this.growl.current.show({ severity: 'success', summary: 'Alert saved', detail: 'everything saved' });
+        // this.growl.current.show({ severity: 'success', summary: 'Alert saved', detail: 'everything saved' });
+        notification.open({
+            message: 'Success',
+            description: 'All alerts saved',
+        })
     }
 
     rowExpansionTemplate(data) {
@@ -76,7 +72,7 @@ class Settings extends React.Component {
         return (
             <React.Fragment>
 
-                <Growl ref={this.growl}></Growl>
+                {/* <Growl ref={this.growl}></Growl> */}
 
                 <div className="content-section">
                     <div className="feature-intro">
