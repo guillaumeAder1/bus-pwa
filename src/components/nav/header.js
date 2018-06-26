@@ -1,12 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import '../../org.css'
-import Login from '../login'
-
-
 import { Menu, Icon } from 'antd';
-const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
+
 
 
 class Header extends React.Component {
@@ -25,13 +20,13 @@ class Header extends React.Component {
                 mode="horizontal"
             >
                 <Menu.Item key="dashboard">
-                    <Icon type="clock-circle-o" />Dashboard
+                    <Link to="/dashboard"><Icon type="clock-circle-o" />Dashboard</Link>
                 </Menu.Item>
                 <Menu.Item key="settings">
-                    <Icon type="setting" />Settings
+                    <Link to="/settings"><Icon type="setting" />Settings</Link>
                 </Menu.Item>
                 <Menu.Item key="profile">
-                    <Icon type="user" />Profile
+                    <Link to="/profile"><Icon type="user" />Profile</Link>
                 </Menu.Item>
             </Menu >
         );

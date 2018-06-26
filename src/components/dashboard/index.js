@@ -4,6 +4,9 @@ import { Growl } from 'primereact/components/growl/Growl';
 
 import Button from 'antd/lib/button';
 
+import { Select } from 'antd';
+const Option = Select.Option;
+
 class Dashborad extends Component {
     constructor() {
         super();
@@ -49,6 +52,8 @@ class Dashborad extends Component {
         console.warn('Error:', error)
     }
     selected(e) {
+
+        console.log(e)
         const busapi = `https://data.smartdublin.ie/cgi-bin/rtpi/realtimebusinformation?stopid=${e.busstopid}&format=json`
         fetch(busapi)
             .then(response => response.json())
@@ -60,6 +65,15 @@ class Dashborad extends Component {
             <Fragment>
                 <Growl ref={this.growl}></Growl>
                 <h1 title="Dashborad"> Dashboard 2.0 </h1>
+                {this.state.alerts &&
+                    <Select
+                        onChange={(e) => this.selected(e)}
+                        placeholder="select an alert"
+                        style={{ width: '100%', padding: '10px' }}>
+                        {this.state.alerts.map((e, i) => <Option key={i} value={e.items}>{e.label}</Option>)}
+                    </Select>
+                }
+
                 {this.state.alerts && <SplitButton label="select alert" icon="pi pi-check" model={this.state.alerts}></SplitButton>}
                 <div className="bus-results" >
                     {this.state.selected &&
