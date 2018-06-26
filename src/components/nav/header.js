@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom'
 import '../../org.css'
 import Login from '../login'
 
+
+import { Menu, Icon } from 'antd';
+const SubMenu = Menu.SubMenu;
+const MenuItemGroup = Menu.ItemGroup;
+
+
 class Header extends React.Component {
 
     constructor() {
@@ -13,24 +19,23 @@ class Header extends React.Component {
     render() {
         return (
 
-            <div className="layout-wrapper">
-                <div id="layout-topbar">
-                    <a href="" className="menu-button"></a>
-                    <a href="" className="menu-logo">
-                        <img />
-
-                    </a>
-                    <ul className="topbar-menu">
-                        <li><Link to="/dashboard"> Dashboard </Link></li>
-                        <li><Link to="/settings"> Settings </Link></li>
-                        <li><Link to="/ant"> Ant </Link></li>
-                        <Login />
-
-                    </ul>
-                </div>
-            </div>
-
+            <Menu
+                onClick={this.handleClick}
+                selectedKeys={[this.state.current]}
+                mode="horizontal"
+            >
+                <Menu.Item key="dashboard">
+                    <Icon type="clock-circle-o" />Dashboard
+                </Menu.Item>
+                <Menu.Item key="settings">
+                    <Icon type="setting" />Settings
+                </Menu.Item>
+                <Menu.Item key="profile">
+                    <Icon type="user" />Profile
+                </Menu.Item>
+            </Menu >
         );
+
     }
 }
 
