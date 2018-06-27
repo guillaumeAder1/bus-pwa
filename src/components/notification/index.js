@@ -6,7 +6,7 @@ import { message } from 'antd';
  * @param {Object} props params
  * @param {String} props.level level of message, success/error/info/warning/warn/loading 
  * @param {String} props.message text to display
- * @param {Number} props.duration delay 
+ * @param {Number} props.duration delay in seconde
  */
 const Notif = (props) => {
     const level = props.level || 'success';
