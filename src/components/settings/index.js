@@ -69,17 +69,6 @@ class Settings extends React.Component {
         this.setState({ editor: visible, currentRow: data });
     }
     render() {
-        // const handleRowSelection = {
-        //     onChange: (selectedRowKeys, selectedRows) => {
-        //         console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-        //     },
-        //     onSelect: (record, selected, selectedRows) => {
-        //         console.log(record, selected, selectedRows);
-        //     },
-        //     onSelectAll: (selected, selectedRows, changeRows) => {
-        //         console.log(selected, selectedRows, changeRows);
-        //     },
-        // };
 
         return (
             <React.Fragment>
@@ -97,7 +86,10 @@ class Settings extends React.Component {
                     />
 
                 }
-                <Editor visible={this.state.editor} data={this.state.currentRow} />
+                <Editor
+                    visible={this.state.editor}
+                    data={this.state.currentRow}
+                    onUpdate={(bool, data) => this.setEditor(bool, data)} />
             </React.Fragment >
 
         )
