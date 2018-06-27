@@ -1,8 +1,6 @@
 import React, { Component, Fragment } from 'react'
-import Button from 'antd/lib/button';
-import { Select, notification, List, Spin } from 'antd';
-
-
+import { Select, List } from 'antd';
+import Notif from '../notification/'
 
 const Option = Select.Option;
 
@@ -45,10 +43,9 @@ class Dashborad extends Component {
     }
 
     notification(msg, text, level) {
-        notification[level]({
-            message: msg,
-            description: text,
-            placement: 'bottomRight'
+        Notif({
+            level: level,
+            message: text
         })
     }
 
