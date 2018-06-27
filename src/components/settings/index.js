@@ -69,6 +69,18 @@ class Settings extends React.Component {
         this.setState({ editor: visible, currentRow: data });
     }
     render() {
+        // const handleRowSelection = {
+        //     onChange: (selectedRowKeys, selectedRows) => {
+        //         console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+        //     },
+        //     onSelect: (record, selected, selectedRows) => {
+        //         console.log(record, selected, selectedRows);
+        //     },
+        //     onSelectAll: (selected, selectedRows, changeRows) => {
+        //         console.log(selected, selectedRows, changeRows);
+        //     },
+        // };
+
         return (
             <React.Fragment>
 
@@ -78,8 +90,9 @@ class Settings extends React.Component {
                         pagination={false}
                         columns={this.columns}
                         dataSource={this.state.alerts}
+                        // rowSelection={handleRowSelection}
                         onRow={record => ({
-                            onClick: (e) => this.setEditor(true, e)
+                            onClick: (e) => this.setEditor(true, record)
                         })}
                     />
 
