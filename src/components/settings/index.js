@@ -1,15 +1,11 @@
-import React from 'react'
-import { Toolbar } from 'primereact/components/toolbar/Toolbar';
-// import { Button } from 'primereact/components/button/Button'
-import { DataTable } from 'primereact/components/datatable/DataTable';
-import { Column } from 'primereact/components/column/Column';
-// import { Growl } from 'primereact/components/growl/Growl';
-
+import React, { Component, Fragment } from 'react'
 import json from './busdata.json'
-import { Table, Modal, Button, notification } from 'antd';
+import { Table, Button, Card } from 'antd';
+import Notif from '../notification'
 import Editor from './editor'
+const ButtonGroup = Button.Group;
 
-class Settings extends React.Component {
+class Settings extends Component {
     constructor() {
         super();
         this.state = {
@@ -59,11 +55,18 @@ class Settings extends React.Component {
     }
 
     save() {
-        localStorage.setItem("alerts", JSON.stringify(this.state.alerts));
-        notification.open({
-            message: 'Success',
-            description: 'All alerts saved',
-        })
+        Notif({
+            level: 'loading',
+            message: 'Saving alerts'
+        });
+        setTimeout(() => {
+            localStorage.setItem("alerts", JSON.stringify(this.state.alerts));
+            Notif({
+                level: 'success',
+                message: 'All alerts saved'
+            });
+        }, 1500)
+
     }
     setEditor(visible, data) {
         this.setState({ editor: visible, currentRow: data });
@@ -71,26 +74,34 @@ class Settings extends React.Component {
     render() {
 
         return (
-            <React.Fragment>
+            <Card
+                bodyStyle={{ padding: '10px' }}
+                title="Settings">
 
                 {
                     this.state.alerts &&
-                    <Table
-                        pagination={false}
-                        columns={this.columns}
-                        dataSource={this.state.alerts}
-                        // rowSelection={handleRowSelection}
-                        onRow={record => ({
-                            onClick: (e) => this.setEditor(true, record)
-                        })}
-                    />
+                    <Fragment>
+                        <ButtonGroup>
+                            <Button onClick={() => this.save()} type="primary" icon="check-circle-o" >Save</Button>
+                            <Button type="danger" icon="close-circle-o" >Cancel</Button>
+                        </ButtonGroup>
+                        <Table
+                            pagination={false}
+                            columns={this.columns}
+                            dataSource={this.state.alerts}
+                            onRow={record => ({
+                                onClick: (e) => this.setEditor(true, record)
+                            })}
+                        />
+                    </Fragment>
+
 
                 }
                 <Editor
                     visible={this.state.editor}
                     data={this.state.currentRow}
                     onUpdate={(bool, data) => this.setEditor(bool, data)} />
-            </React.Fragment >
+            </Card >
 
         )
     }
