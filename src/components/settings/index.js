@@ -3,6 +3,7 @@ import json from './busdata.json'
 import { Table, Button, Card } from 'antd';
 import Notif from '../notification'
 import Editor from './editor'
+import busstops from './bus_stops.json'
 const ButtonGroup = Button.Group;
 
 
@@ -102,6 +103,7 @@ class Settings extends Component {
 
                 }
                 <Editor
+                    buslist={busstops}
                     visible={this.state.editor}
                     data={this.state.currentRow}
                     onUpdate={(bool, data) => this.setEditor(bool, data)} />
