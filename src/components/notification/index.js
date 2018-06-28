@@ -12,7 +12,8 @@ const Notif = (props) => {
     const level = props.level || 'success';
     const text = props.message || 'Operation completed';
     const duration = props.duration || 1;
-    message[level](text, duration)
+    const onClose = props.onClose || function () { console.log('Notif Message closes') };
+    message[level](text, duration, onClose)
 
 }
 

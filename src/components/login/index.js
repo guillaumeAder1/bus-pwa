@@ -4,6 +4,15 @@ import { Button } from 'primereact/components/button/Button';
 import { InputText } from 'primereact/components/inputtext/InputText'
 import { Password } from 'primereact/components/password/Password';
 
+
+/**
+ * Login page
+ * implementation should work as following:
+ * - user signin, then save credential on localstorage,
+ * - user login, check if cred exists for username in locastorage
+ *      - if true then look for a list of alerts[] for this user
+ * - user logout...
+ */
 class Login extends React.Component {
     constructor() {
         super();

@@ -5,6 +5,10 @@ import Notif from '../notification'
 import Editor from './editor'
 const ButtonGroup = Button.Group;
 
+
+/**
+ * Settings - table to create, edit remove alert 
+ */
 class Settings extends Component {
     constructor() {
         super();

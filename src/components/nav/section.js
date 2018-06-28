@@ -4,6 +4,10 @@ import Dashboard from '../dashboard'
 import Settings from '../settings'
 import Login from '../login'
 import Test from '../ant'
+
+/**
+ * Section - Router pages 
+ */
 const Section = () => {
     return (
         <Switch>

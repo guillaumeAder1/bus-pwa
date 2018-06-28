@@ -4,6 +4,11 @@ import Notif from '../notification/'
 
 const Option = Select.Option;
 
+
+/**
+ * Dashboard - list all bus comming to the selected stopid.
+ * Can select which stopid you want to see
+ */
 class Dashborad extends Component {
     constructor() {
         super();

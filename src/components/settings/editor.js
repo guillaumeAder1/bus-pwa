@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import { Modal, Input } from 'antd';
 
-
+/**
+ * Modal displaying input fields to be edited...
+ * @param {props} props params
+ * 
+ */
 const Editor = (props) => {
 
-    let visible = props.visible
 
     const callback = (bool) => {
-        console.log(bool)
-        visible = false
         props.onUpdate(false)
     }
 
