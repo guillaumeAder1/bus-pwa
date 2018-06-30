@@ -12,12 +12,16 @@ const Editor = (props) => {
 
     /**
      * callback passed to parent component index.js
-     * @param {*} bool    
-     * 
+     * @param {*} bool 
      * */
     const callback = (bool) => {
         props.onUpdate(false)
     }
+
+    const filterBuslines = (value) => {
+        console.log(value)
+    }
+
 
     /** 
      * @param {String} field fields name e.g. busstopid/stopname/filter/time
@@ -29,30 +33,29 @@ const Editor = (props) => {
             case 'busstopid':
                 return (<Fragment><b>{field}</b> <Input size="large" defaultValue={value} /></Fragment>)
 
-                break;
             case 'stopname':
                 return (<Fragment><b>{field}</b> <Input size="large" defaultValue={value} /></Fragment>)
 
-                break;
             case 'filter':
-                const elements = Object.keys(props.buslist).map(e => <Option key={e}>{e.toString()}</Option>)
+                // const elements = Object.keys(props.buslist).map(e => <Option key={e}>{e.toString()}</Option>)
+                ///const elements = Object.keys(props.buslist).map(e => <Option key={e}>{e.toString()}</Option>)
                 const select = (<Select
                     mode="multiple"
                     style={{ width: '100%' }}
                     placeholder="Please select"
+                    onSearch={filterBuslines}
                     defaultValue={['a10', 'c12']}
                 >
-                    {elements}
+                    {/* {elements} */}
                 </Select>)
                 return (<Fragment><b>{field}</b> {select}</Fragment>)
 
-                break;
             case 'time':
                 return (<Fragment><b>{field}</b> <TimePicker defaultValue={moment(value, format)} format={format} /></Fragment>)
-                break;
+
             default:
                 return (<Fragment><b>{field}</b> <Input size="large" defaultValue={value} /></Fragment>)
-                break;
+
         }
     }
 
@@ -69,9 +72,6 @@ const Editor = (props) => {
                     return (
                         <div key={i}>
                             {createInputType(key, props.data[key])}
-
-                            {/* <b>{key}</b>
-                            <Input size="large" defaultValue={props.data[key]} /> */}
                         </div>
                     )
                 })
