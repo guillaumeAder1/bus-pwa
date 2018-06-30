@@ -1,40 +1,47 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+// import './headercss.css'
+
 import { Menu, Icon } from 'antd';
 
-/**
- * Header - Router Link to section 
- */
-class Header extends React.Component {
 
-    constructor() {
-        super();
-        this.state = {};
-    }
+/**
+ * Navmenu - Router Link to section 
+ */
+class Navmenu extends React.Component {
+
 
     render() {
         return (
+            <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
 
-            <Menu
-                theme='dark'
-                onClick={this.handleClick}
-                selectedKeys={[this.state.current]}
-                mode="horizontal"
-            >
-                <Menu.Item key="dashboard">
-                    <Link to="/dashboard"><Icon type="clock-circle-o" />Dashboard</Link>
+                <Menu.Item key="1">
+                    <Link to="/dashboard">
+                        <Icon type="clock-circle-o" />
+                        <span>Dashboard</span>
+                    </Link>
                 </Menu.Item>
-                <Menu.Item key="settings">
-                    <Link to="/settings"><Icon type="setting" />Settings</Link>
+
+                <Menu.Item key="2">
+                    <Link to="/settings">
+                        <Icon type="setting" />
+                        <span>Settings</span>
+                    </Link>
                 </Menu.Item>
-                <Menu.Item key="profile">
-                    <Link to="/profile"><Icon type="user" />Profile</Link>
+
+                <Menu.Item key="3">
+                    <Link to="/profile">
+                        <Icon type="user" />
+                        <span>Profile</span>
+                    </Link>
+
                 </Menu.Item>
-            </Menu >
+
+            </Menu>
         );
 
     }
 }
 
 
-export default Header;
+export default Navmenu;
