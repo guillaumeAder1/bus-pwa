@@ -41,13 +41,14 @@ class Dashborad extends Component {
         if (json.errorcode === "1") {
             this.notification('warning', `No results found for stopid: ${json.stopid}`, 'warn');
         } else {
+            this.notification('timetable refreshed')
             const search = this.state.alerts.filter(e => e.data.busstopid == json.stopid)[0];
             const matching = json.results.filter(e => search.data.filter.indexOf(e.route) > -1);
             this.setState({ selected: matching });
         }
     }
 
-    notification(msg, text, level) {
+    notification(text = "", level = "") {
         Notif({
             level: level,
             message: text
@@ -55,16 +56,24 @@ class Dashborad extends Component {
     }
 
     handleErr(error) {
-        this.notification('Error', `Issue while fetching data`, 'error');
+        this.timer && clearInterval(this.timer)
+        this.notification(`Issue while fetching data`, 'error');
         console.warn('Error:', error)
     }
     selected(id) {
+
         this.setState({ current: id })
         const busapi = `https://data.smartdublin.ie/cgi-bin/rtpi/realtimebusinformation?stopid=${id}&format=json`
         fetch(busapi)
             .then(response => response.json())
             .then(json => this.handleJson(json))
             .catch(error => this.handleErr(error));
+        this.timer && clearInterval(this.timer)
+        this.timer = setTimeout(() => { this.selected(this.state.current) }, 15000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timer)
     }
     render() {
         return (
