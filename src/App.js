@@ -33,20 +33,19 @@ class App extends Component {
             trigger={null}
             collapsible
             collapsed={this.state.collapsed}
-
             breakpoint="sm"
             collapsedWidth="0"
             onCollapse={(collapsed, type) => { console.log(collapsed, type); this.toggle() }}
           >
-            <div className="logo" />
-            <Navmenu />
+            <div className="logo"></div>
+            <Navmenu onSelected={() => this.toggle()} />
           </Sider>
           <Layout>
             <Header style={{ position: 'fixed', width: '100%', zIndex: 1, background: '#fff', padding: 0 }}>
               <Icon
                 className="trigger"
                 type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
-                onClick={this.toggle}
+                onClick={() => this.toggle()}
               />
             </Header>
             <Section />
